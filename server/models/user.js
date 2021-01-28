@@ -17,6 +17,13 @@ const userSchema = new mongoose.Schema({
     maxlength: 255,
     unique: true,
   },
+  username: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 50,
+    unique: true,
+  },
   password: {
     type: String,
     required: true,
@@ -24,8 +31,8 @@ const userSchema = new mongoose.Schema({
     minlength: 5,
   },
   isAdmin: {
-    type: Boolean
-  }
+    type: Boolean,
+  },
 });
 const User = mongoose.model("User", userSchema);
 
