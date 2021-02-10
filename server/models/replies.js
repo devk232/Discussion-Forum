@@ -25,13 +25,12 @@ const replySchema = new mongoose.Schema({
   }
 });
 
-const Reply = mongoose.model("Post", replySchema);
+const Reply = mongoose.model("Reply", replySchema);
 
+
+// function to validate posts
 function validateReply(post) {
-    const schema = Joi.object({
-        comment = Joi.string().min(3).max(1024).required()
-    });
-    return schema.validate(post);
+  return true;
 };
 
 
