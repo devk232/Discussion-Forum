@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { User } = require("./user");
 const Joi = require("joi");
-const tagSchema = require("./tag");
+const { tagSchema } = require("./tag");
 
 const postSchema = new mongoose.Schema({
   title: {
@@ -12,10 +12,9 @@ const postSchema = new mongoose.Schema({
   },
   tags: {
     type: [tagSchema],
-    ref: "User",
     validate: {
       validator: function (a) {
-        return a && a.length > 0;
+        return a && a.length >= 0;
       },
     },
     required: true,
@@ -25,6 +24,7 @@ const postSchema = new mongoose.Schema({
     required: true,
     minlength: 5,
     maxlength: 1024,
+    required: true,
   },
   author: {
     type: mongoose.Schema.Types.ObjectId,
@@ -34,11 +34,12 @@ const postSchema = new mongoose.Schema({
   views: {
     type: Number,
     default: 1,
+    min: 1,
   },
   upvotes: {
     type: [mongoose.Schema.Types.ObjectId],
     ref: "User",
-    default: 0,
+    default: [],
   },
   time: {
     type: Date,
@@ -51,6 +52,8 @@ const Post = mongoose.model("Post", postSchema);
 function validatePost(post) {
   const schema = Joi.object({
     title: Joi.string().required().min(10).max(80),
+    description: Joi.string().required().min(3).max(1024),
+    tags: Joi.array()
   });
   return schema.validate(post);
 }
@@ -72,7 +75,7 @@ exports.validatePost = validatePost;
 //     author: '6012bd5feff00735ffd93f83'
 //   });
 //   await a.save();
-// }
+// } 
 
 //CreatePost();
 

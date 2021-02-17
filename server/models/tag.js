@@ -23,5 +23,7 @@ function validateTag(tag) {
   });
   return schema.validate(tag);
 }
+
+exports.tagSchema = tagSchema;
 exports.validateTag = validateTag;
 exports.Tag = Tag;

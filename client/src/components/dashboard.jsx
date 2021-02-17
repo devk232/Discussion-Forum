@@ -1,50 +1,49 @@
 import React, { Component } from "react";
-import axios from "axios";
+import { Link } from "react-router-dom";
 import Pagination from "./common/pagination";
 import ListGroup from "./listgroup";
-import { Link } from "react-router-dom";
 import Posts from "./posts";
 import { paginate } from "../utils/paginate";
+import config from "../config.json";
+import http from "../services/httpService";
 
 class Dashboard extends Component {
   state = {
     allposts: [],
     currentPage: 1,
     pageSize: 20,
-    tags: [
-      { _id: 1, value: "All Tags" },
-      { _id: 2, value: "faltu" },
-      { _id: 3, value: "hello" },
-      { _id: 4, value: "curiosity" },
-      { _id: 5, value: "me" },
-    ],
-    selectedTag: { value: "All Tags" },
+    tags: [],
+    selectedTag: { _id: "1", name: "All Posts" },
   };
   async componentDidMount() {
-    const { data } = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts"
-    );
-    console.log(data);
-    this.setState({ allposts: data });
+    const { data: allposts } = await http.get(config.postEndPoint);
+    const { data: tags } = await http.get(config.tagsEndPoint);
+
+    this.setState({
+      allposts: [...allposts],
+      tags: [
+        {
+          _id: "1",
+          name: "All Posts",
+        },
+        ...tags,
+      ],
+    });
   }
   handlePageChange = (page) => {
     this.setState({ currentPage: page });
   };
   handlePostDelete = (post) => {};
   handleTagSelect = (tag) => {
+    console.log(tag);
     this.setState({ selectedTag: tag, currentPage: 1 });
   };
   render() {
-    const {
-      allposts,
-      pageSize,
-      currentPage,
-      tags,
-      selectedTag,
-    } = this.state;
+    const { user } = this.props;
+    const { allposts, pageSize, currentPage, tags, selectedTag } = this.state;
     const filtered =
-      selectedTag.value !== "All Tags"
-        ? allposts.filter((post) => post.tags.includes(selectedTag.value))
+      selectedTag.name !== "All Posts"
+        ? allposts.filter((post) => post.tags.includes(selectedTag))
         : allposts;
     const posts = paginate(filtered, currentPage, pageSize);
     if (allposts.length === 0)
@@ -56,11 +55,17 @@ class Dashboard extends Component {
             <div className="col">
               <div className="d-flex w-100 justify-content-between m-3">
                 Showing {filtered.length} posts.
-                <a href="/new-post">
-                  <button type="button" class="btn btn-success">
-                    Create New Discussion
-                  </button>
-                </a>
+                {user && (
+                  <Link to="/new-post">
+                    <button
+                      type="button"
+                      class="btn btn-success"
+                      style={{ marginBottom: 20 }}
+                    >
+                      New Post
+                    </button>
+                  </Link>
+                )}
               </div>
             </div>
           </div>

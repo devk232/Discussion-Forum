@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const cookieParser = require("cookie-parser");
-
+const cors = require("cors");
 const users = require("./routes/users");
 const posts = require("./routes/posts");
 const tags = require("./routes/tags");
@@ -30,11 +30,11 @@ mongoose
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("request successfully sent!");
 });
-
 
 app.use("/users", users);
 app.use("/posts", posts);

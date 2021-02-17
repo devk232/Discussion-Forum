@@ -5,7 +5,7 @@ const { Tag, validateTag } = require("../models/tag");
 const _ = require("lodash");
 const router = express.Router();
 
-router.get("/",[auth, admin], async (req, res) => {
+router.get("/", async (req, res) => {
   const tags = await Tag.find();
   res.send(tags);
 });

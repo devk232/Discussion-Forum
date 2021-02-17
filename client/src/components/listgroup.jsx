@@ -2,7 +2,6 @@ import React from "react";
 
 const ListGroup = (props) => {
   const { items, selectedTag, onTagSelect } = props;
-  console.log(selectedTag);
   return (
     <ul className="list-group">
       {items.map((item) => (
@@ -13,7 +12,7 @@ const ListGroup = (props) => {
           }
           onClick={() => onTagSelect(item)}
         >
-          {item.value}
+          {item.name}
         </li>
       ))}
     </ul>
