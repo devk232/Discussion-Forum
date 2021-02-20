@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const NavBar = ({ user }) => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark  sticky-top ">
       <NavLink className="navbar-brand" to="/">
         Community
       </NavLink>
@@ -19,18 +19,20 @@ const NavBar = ({ user }) => {
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div className="collapse navbar-collapse" id="navbarColor03">
+      <div className="collapse navbar-collapse row" id="navbarColor03">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
-            <NavLink className="nav-link" to="#">
+            <NavLink className="nav-link ml-3" to="/">
               Home
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink className="nav-link" to="#">
-              Features
+            <NavLink className="nav-link ml-2" to="/dashboard">
+              Dashboard
             </NavLink>
           </li>
+        </ul>
+        <ul className="nav navbar-nav navbar-right">
           {!user && (
             <React.Fragment>
               <li className="nav-item">
@@ -49,7 +51,7 @@ const NavBar = ({ user }) => {
             <React.Fragment>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/me">
-                  Hi {user.username} !
+                  Hi {user.username}
                 </NavLink>
               </li>
               <li className="nav-item">
@@ -59,33 +61,6 @@ const NavBar = ({ user }) => {
               </li>
             </React.Fragment>
           )}
-          <li className="nav-item dropdown">
-            <a
-              className="nav-link dropdown-toggle"
-              data-toggle="dropdown"
-              href="/drop"
-              role="button"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Dropdown
-            </a>
-            {/* <div className="dropdown-menu">
-                <a className="dropdown-item" to="#">
-                  Action
-                </a>
-                <a className="dropdown-item" to="#">
-                  Another action
-                </a>
-                <a className="dropdown-item" to="#">
-                  Something else here
-                </a>
-                <div className="dropdown-divider"></div>
-                <a className="dropdown-item" to="#">
-                  Separated link
-                </a>
-              </div> */}
-          </li>
         </ul>
       </div>
     </nav>

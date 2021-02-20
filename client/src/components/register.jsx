@@ -1,11 +1,11 @@
-import React from "react"; 
+import React from "react";
 import Input from "./common/input";
 import Form from "./common/form";
 import Joi from "joi-browser";
+import { Redirect } from "react-router-dom";
 import * as userService from "../services/userService";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/react-toastify.esm";
-
 
 class Register extends Form {
   state = {
@@ -23,8 +23,8 @@ class Register extends Form {
     try {
       const response = await userService.register(this.state.data);
       console.log(response);
-      localStorage.setItem('token', response.headers["x-auth-token"]);
-      window.location = '/dashboard';
+      localStorage.setItem("token", response.headers["x-auth-token"]);
+      window.location = "/dashboard";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         //const errors = { ...this.state.errors };
@@ -35,6 +35,9 @@ class Register extends Form {
   };
   render() {
     const { data, errors } = this.state;
+    if (localStorage.getItem("token")) {
+      return <Redirect to="/dashboard" />;
+    }
     return (
       <React.Fragment>
         <ToastContainer />

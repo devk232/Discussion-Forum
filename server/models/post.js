@@ -53,7 +53,7 @@ function validatePost(post) {
   const schema = Joi.object({
     title: Joi.string().required().min(10).max(80),
     description: Joi.string().required().min(3).max(1024),
-    tags: Joi.array()
+    tags: Joi.array(),
   });
   return schema.validate(post);
 }
@@ -75,7 +75,7 @@ exports.validatePost = validatePost;
 //     author: '6012bd5feff00735ffd93f83'
 //   });
 //   await a.save();
-// } 
+// }
 
 //CreatePost();
 

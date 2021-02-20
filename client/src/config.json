@@ -1,5 +1,6 @@
 {
-  "postEndPoint" : "http://localhost:4000/posts",
-  "tagsEndPoint" : "http://localhost:4000/tags",
-  "usersEndPoint": "http://localhost:4000/users/"
+  "postEndPoint": "http://localhost:4000/posts/",
+  "tagsEndPoint": "http://localhost:4000/tags/",
+  "usersEndPoint": "http://localhost:4000/users/",
+  "repliesEndPoint": "http://localhost:4000/reply/"
 }

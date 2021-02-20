@@ -2,20 +2,11 @@ import React from "react";
 
 const Jumotron = () => {
   return (
-    <div className="jumbotron jumbotron-fluid">
+    <div className="jumbotron">
       <h1 className="display-3">Community</h1>
-      <p className="lead">
-        A discussion forum created for Technology Enthusiasts!
-      </p>
-      <p className="lead">
-        <a
-          className="btn btn-primary btn-lg"
-          href="http://www.google.com"
-          role="button"
-        >
-          Learn more
-        </a>
-      </p>
+      <p class="lead">We &lt;3 people who code!</p>
+      <hr class="my-4" />
+      <p className="lead">A disscussion forum for enthusiastic developers.</p>
     </div>
   );
 };

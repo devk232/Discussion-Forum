@@ -9,6 +9,7 @@ import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.css";
 import "font-awesome/css/font-awesome.css";
 
+
 Sentry.init({
   dsn:
     "https://99004148dd2d49a7a345734365705e90@o523591.ingest.sentry.io/5635770",

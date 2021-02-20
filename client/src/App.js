@@ -22,7 +22,6 @@ class App extends Component {
     try {
       const jwt = localStorage.getItem("token");
       const user_jwt = jwtDecode(jwt);
-      console.log(`${usersEndPoint}${user_jwt._id}`);
       const user = await http.get(`${usersEndPoint}${user_jwt._id}`);
       this.setState({ user: user.data });
     } catch (ex) {}
@@ -46,7 +45,10 @@ class App extends Component {
             path="/new-post"
             render={(props) => <NewPost {...props} user={this.state.user} />}
           />
-          <Route path="/post/:id" component={PostPage}/>
+          <Route
+            path="/post/:id"
+            render={(props) => <PostPage {...props} user={this.state.user} />}
+          />
           <Route exact path="/" component={Jumotron} />
           <Redirect from="/users" to="/users/login " />
           <Redirect to="/not-found" />

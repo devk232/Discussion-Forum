@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import Joi, { errors } from "joi-browser";
+import React from "react";
+import Joi from "joi-browser";
 import { ToastContainer, toast } from "react-toastify";
 import Input from "./common/input";
 import Form from "./common/form";
@@ -16,7 +16,7 @@ class NewPost extends Form {
   schema = {
     title: Joi.string().required().min(5).label("Title"),
     description: Joi.string().required().min(3).label("Description"),
-    tags: Joi.array()
+    tags: Joi.array(),
   };
   handleTagChange = (tagID) => {
     console.log("hello");
@@ -58,9 +58,9 @@ class NewPost extends Form {
       <React.Fragment>
         <ToastContainer />
         <div className="container-lg">
-          <h1>Create a New Discussion</h1>
+          <h1 className="text-center m-2">Create a New Discussion</h1>
           <div
-            className="container-lg-6 m-4 p-4 rounded"
+            className="container m-4 p-4 rounded"
             style={{ backgroundColor: "#F1F1F1" }}
           >
             <form onSubmit={this.handleSubmit}>

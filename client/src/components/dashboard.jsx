@@ -11,7 +11,7 @@ class Dashboard extends Component {
   state = {
     allposts: [],
     currentPage: 1,
-    pageSize: 20,
+    pageSize: 4,
     tags: [],
     selectedTag: { _id: "1", name: "All Posts" },
   };
@@ -35,16 +35,28 @@ class Dashboard extends Component {
   };
   handlePostDelete = (post) => {};
   handleTagSelect = (tag) => {
-    console.log(tag);
     this.setState({ selectedTag: tag, currentPage: 1 });
   };
+  getPosts() {
+    const { allposts, selectedTag } = this.state;
+    const filtered = [];
+    for (let i in allposts) {
+      const post = allposts[i];
+      const { tags } = post;
+      for (let j in tags) {
+        if (tags[j].name === selectedTag.name) {
+          filtered.push(post);
+          break;
+        }
+      }
+    }
+    console.log(filtered);
+    return filtered;
+  }
   render() {
     const { user } = this.props;
     const { allposts, pageSize, currentPage, tags, selectedTag } = this.state;
-    const filtered =
-      selectedTag.name !== "All Posts"
-        ? allposts.filter((post) => post.tags.includes(selectedTag))
-        : allposts;
+    const filtered = selectedTag._id === "1" ? allposts : this.getPosts();
     const posts = paginate(filtered, currentPage, pageSize);
     if (allposts.length === 0)
       return <p>There are no posts in the database!</p>;

@@ -1,22 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Posts = (props) => {
-  const { posts, onDelete } = props;
+  const { posts } = props;
   return (
     <div className="list-group">
       {posts.map((post) => (
-        
-        <a className="list-group-item list-group-item-action flex-column align-items-start" href='/posts/'>
+        <Link
+          className="list-group-item list-group-item-action flex-column align-items-start"
+          to={`/post/${post._id}`}
+        >
           <div className="d-flex w-100 justify-content-between" key={post._id}>
             <h5 className="mb-1">{post.title}</h5>
-            <button
-              type="button"
-              class="close"
-              aria-label="Close"
-              onClick={() => onDelete(post)}
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
           </div>
           <small>Created by {post.author.name}</small>
           <br />
@@ -30,7 +25,7 @@ const Posts = (props) => {
               {post.upvotes.length} Likes | {post.views} Views
             </h6>
           </div>
-        </a>
+        </Link>
       ))}
     </div>
   );
