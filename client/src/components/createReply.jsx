@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import Joi from "joi-browser";
-import { Toast, ToastContainer } from "react-toastify";
+import {ToastContainer } from "react-toastify";
 import Form from "./common/form";
 import { createreply } from "../services/replyCreateService";
 import { Redirect } from "react-router-dom";
@@ -12,7 +12,7 @@ class PostReply extends Form {
     },
     errors: { comment: "" },
   };
-  schema = {
+  schema = { 
     comment: Joi.string().required().min(5).label("Comment"),
   };
   doSubmit = async () => {
