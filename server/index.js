@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
@@ -10,15 +11,11 @@ const tags = require("./routes/tags");
 const replies = require("./routes/replies");
 const app = express();
 
-if (!config.get("jwtPrivateKey")) {
-  console.log("FATAL ERROR: JwtPrivateKey not defined");
-  process.exit(1);
-}
 
-let mongoDB = "mongodb://127.0.0.1/forum";
+let mongoDBURL = process.env.mongoDBURL;
 
 mongoose
-  .connect(mongoDB, {
+  .connect(mongoDBURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,

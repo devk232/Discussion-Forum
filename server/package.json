@@ -8,6 +8,7 @@
     "config": "^3.3.3",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.17.1",
     "joi": "^17.3.0",
     "joi-password-complexity": "^5.0.2",
