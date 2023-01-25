@@ -1,8 +1,8 @@
 import http from "./httpService";
-import { postEndPoint } from "../config.json";
+import  { api } from "../config.js";
 
 export function createpost(postbody, user) {
-  return http.post(postEndPoint + '/create', {
+  return http.post(api.postEndPoint + '/create', {
     title: postbody.title,
     description: postbody.description,
     tags: postbody.tags

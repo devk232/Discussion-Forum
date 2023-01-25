@@ -1,8 +1,8 @@
 import http from "./httpService";
-import { usersEndPoint } from "../config.json";
+import { api } from "../config.js";
 
 export function login(email, password) {
-  return http.post(usersEndPoint + "/login", {
+  return http.post(api.usersEndPoint + "/login", {
     email: email,
     password: password,
   });

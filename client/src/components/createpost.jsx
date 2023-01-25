@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import Input from "./common/input";
 import Form from "./common/form";
 import http from "../services/httpService";
-import { tagsEndPoint } from "../config.json";
+import { api } from "../config.js";
 import { createpost } from "../services/postCreateService";
 
 class NewPost extends Form {
@@ -34,7 +34,7 @@ class NewPost extends Form {
     this.setState({ data });
   };
   async componentDidMount() {
-    let tags = await http.get(tagsEndPoint);
+    let tags = await http.get(api.tagsEndPoint);
     try {
       this.setState({ tags: tags.data });
     } catch (ex) {

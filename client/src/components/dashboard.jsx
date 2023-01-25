@@ -4,7 +4,7 @@ import Pagination from "./common/pagination";
 import ListGroup from "./listgroup";
 import Posts from "./posts";
 import { paginate } from "../utils/paginate";
-import config from "../config.json";
+import { api } from "../config.js";
 import http from "../services/httpService";
 
 class Dashboard extends Component {
@@ -16,8 +16,8 @@ class Dashboard extends Component {
     selectedTag: { _id: "1", name: "All Posts" },
   };
   async componentDidMount() {
-    const { data: allposts } = await http.get(config.postEndPoint);
-    const { data: tags } = await http.get(config.tagsEndPoint);
+    const { data: allposts } = await http.get(api.postEndPoint);
+    const { data: tags } = await http.get(api.tagsEndPoint);
 
     this.setState({
       allposts: [...allposts],

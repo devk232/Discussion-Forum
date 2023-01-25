@@ -4,7 +4,7 @@ import jwtDecode from "jwt-decode";
 import { Route, Switch, Redirect } from "react-router-dom";
 
 import http from "./services/httpService";
-import { usersEndPoint } from "./config.json";
+import { api } from "./config.js";
 import Dashboard from "./components/dashboard";
 import Jumotron from "./components/common/jumbotron";
 import NotFound from "./components/not-found";
@@ -22,7 +22,8 @@ class App extends Component {
     try {
       const jwt = localStorage.getItem("token");
       const user_jwt = jwtDecode(jwt);
-      const user = await http.get(`${usersEndPoint}${user_jwt._id}`);
+      console.log(`${api.usersEndPoint}${user_jwt._id}`);
+      const user = await http.get(`${api.usersEndPoint}${user_jwt._id}`);
       this.setState({ user: user.data });
     } catch (ex) {}
   }

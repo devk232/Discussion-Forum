@@ -4,7 +4,7 @@ import "moment-timezone";
 import { PersonCircle, HandThumbsUpFill } from "react-bootstrap-icons";
 import { ToastContainer, toast } from "react-toastify";
 import http from "../services/httpService";
-import { postEndPoint, repliesEndPoint } from "../config.json";
+import { api } from "../config.js";
 import PostReply from "./createReply";
 
 class PostPage extends Component {
@@ -21,8 +21,8 @@ class PostPage extends Component {
   };
   async componentDidMount() {
     const id = this.props.match.params.id;
-    const { data: post } = await http.get(postEndPoint + "/" + id);
-    const { data: replies } = await http.get(repliesEndPoint + "/" + id);
+    const { data: post } = await http.get(api.postEndPoint + id);
+    const { data: replies } = await http.get(api.repliesEndPoint  + id);
     this.setState({ post: post, replies: replies });
   }
   checkLike() {
@@ -47,7 +47,7 @@ class PostPage extends Component {
   handleUpvote = async () => {
     try {
       const { data: post } = await http.put(
-        postEndPoint + "like/" + this.props.match.params.id,
+        api.postEndPoint + "like/" + this.props.match.params.id,
         {}
       );
       console.log(post);
@@ -61,9 +61,9 @@ class PostPage extends Component {
   handleReplyUpvote = async (id) => {
     try {
       const replies_old = [...this.state.replies];
-      const reply_updated = await http.put(repliesEndPoint + "like/" + id, {});
+      const reply_updated = await http.put(api.repliesEndPoint + "like/" + id, {});
       const { data: replies } = await http.get(
-        repliesEndPoint + "/" + this.props.match.params.id
+        api.repliesEndPoint + "/" + this.props.match.params.id
       );
       console.log(replies);
       this.setState({ replies: replies });
