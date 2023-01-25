@@ -22,7 +22,6 @@ class App extends Component {
     try {
       const jwt = localStorage.getItem("token");
       const user_jwt = jwtDecode(jwt);
-      console.log(`${api.usersEndPoint}${user_jwt._id}`);
       const user = await http.get(`${api.usersEndPoint}${user_jwt._id}`);
       this.setState({ user: user.data });
     } catch (ex) {}

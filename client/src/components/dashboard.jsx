@@ -6,6 +6,7 @@ import Posts from "./posts";
 import { paginate } from "../utils/paginate";
 import { api } from "../config.js";
 import http from "../services/httpService";
+import Jumotron from "./common/jumbotron";
 
 class Dashboard extends Component {
   state = {
@@ -16,7 +17,7 @@ class Dashboard extends Component {
     selectedTag: { _id: "1", name: "All Posts" },
   };
   async componentDidMount() {
-    const { data: allposts } = await http.get(api.postEndPoint);
+    const { data: allposts } = await http.get(api.postsEndPoint);
     const { data: tags } = await http.get(api.tagsEndPoint);
 
     this.setState({
@@ -62,6 +63,7 @@ class Dashboard extends Component {
       return <p>There are no posts in the database!</p>;
     return (
       <React.Fragment>
+        <Jumotron />
         <div className="container">
           <div className="row">
             <div className="col">

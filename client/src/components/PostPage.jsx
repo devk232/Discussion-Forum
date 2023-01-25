@@ -21,7 +21,7 @@ class PostPage extends Component {
   };
   async componentDidMount() {
     const id = this.props.match.params.id;
-    const { data: post } = await http.get(api.postEndPoint + id);
+    const { data: post } = await http.get(api.postsEndPoint + id);
     const { data: replies } = await http.get(api.repliesEndPoint  + id);
     this.setState({ post: post, replies: replies });
   }

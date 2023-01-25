@@ -26,7 +26,7 @@ router.post("/register", async (req, res) => {
     await user.save();
     const token = jwt.sign(
       { _id: user._id, isAdmin: user.isAdmin },
-      config.get("jwtPrivateKey")
+      process.env.jwtPrivateKey
     );
     res
       .header("x-auth-token", token)
@@ -62,7 +62,7 @@ router.post("/login", async (req, res) => {
 
   const token = jwt.sign(
     { _id: user._id, isAdmin: user.isAdmin },
-    config.get("jwtPrivateKey")
+    process.env.jwtPrivateKey
   );
   res.header("x-auth-token").send(token);
 });

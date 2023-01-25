@@ -32,14 +32,13 @@ class PostReply extends Form {
             <div className="form-group">
               <label htmlFor="description">Post Reply</label>
               <textarea
-                className="border border-primary"
+                className="border border-primary form-control"
                 style={{ height: 150 }}
                 value={data.comment}
                 onChange={this.handleChange}
                 name="comment"
                 type="comment"
                 id="comment"
-                className="form-control"
               />
               {errors.description && (
                 <div className="alert-info">{errors.description}</div>

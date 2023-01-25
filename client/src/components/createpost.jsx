@@ -14,8 +14,8 @@ class NewPost extends Form {
     tags: [],
   };
   schema = {
-    title: Joi.string().required().min(5).label("Title"),
-    description: Joi.string().required().min(3).label("Description"),
+    title: Joi.string().required().min(10).label("Title"),
+    description: Joi.string().required().min(5).label("Description"),
     tags: Joi.array(),
   };
   handleTagChange = (tagID) => {
@@ -46,7 +46,6 @@ class NewPost extends Form {
   doSubmit = async () => {
     try {
       const { data } = this.state;
-      console.log(data);
       const { response } = await createpost(data);
       console.log(response);
       window.location = "/dashboard";
