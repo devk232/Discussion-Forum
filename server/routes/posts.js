@@ -46,10 +46,8 @@ router.post("/create", auth, async (req, res) => {
   });
   try {
     await post.save();
-    console.log(post);
     res.send("Post succesfully created.");
   } catch (err) {
-    console.log("dsaf");
     console.log("error: ", err);
   }
 });
