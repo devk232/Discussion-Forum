@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@google/generative-ai": "^0.1.3",
     "@sentry/react": "^6.1.0",
     "@sentry/tracing": "^6.1.0",
     "@testing-library/jest-dom": "^5.11.9",
