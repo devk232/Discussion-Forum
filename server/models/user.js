@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
   },
   isAdmin: {
     type: Boolean,
-    default: false,
+    default: true,
   },
 });
 const User = mongoose.model("User", userSchema);
