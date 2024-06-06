@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const NotFound = () => {
   return (
@@ -11,7 +11,7 @@ const NotFound = () => {
             <div className="mb-4 lead">
               The page you are looking for was not found.
             </div>
-            <Link to= "/dashboard" class="btn btn-link">
+            <Link to="/dashboard" className="btn btn-link">
               Back to Home
             </Link>
           </div>

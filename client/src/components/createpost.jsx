@@ -46,11 +46,15 @@ class NewPost extends Form {
   doSubmit = async () => {
     try {
       const { data } = this.state;
+      console.log('Submitting form with data:', data); // Add this debug log
       const { response } = await createpost(data);
-      console.log(response);
+      console.log('Response after creating post:', response); // Add this debug log
       window.location = "/dashboard";
-    } catch (ex) {}
+    } catch (ex) {
+      console.error('Error creating post:', ex); // Add this debug log
+    }
   };
+  
   render() {
     const { data, errors, tags } = this.state;
     return (

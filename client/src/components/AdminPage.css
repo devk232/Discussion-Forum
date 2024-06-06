@@ -1,0 +1,65 @@
+.admin-page {
+    font-family: Arial, sans-serif;
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 800px;
+  }
+  
+  .user-role-management {
+    margin-bottom: 20px;
+  }
+  
+  .user-role-management h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .user-role-management select,
+  .user-role-management button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    font-size: 1em;
+  }
+  
+  .user-role-management select {
+    width: 200px;
+  }
+  
+  .user-role-management button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .user-role-management button:hover {
+    background-color: #0056b3;
+  }
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+.pie-chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  padding: 20px;
+}
+
+.recharts-wrapper {
+  display: block;
+}
+
+/* Add more styles for other elements in your AdminPage component as needed */
+  

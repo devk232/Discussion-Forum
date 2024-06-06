@@ -9,34 +9,41 @@ import "react-toastify/dist/react-toastify.esm";
 
 class Register extends Form {
   state = {
-    data: { username: "", email: "", password: "", password2: "", name: "" },
-    errors: { username: "", email: "", password: "", password2: "", name: "" },
+    data: { username: "", email: "", password: "", password2: "", name: "", role: "", cinNumber: "" },
+    errors: {},
+    registered: false // Track if the registration is successful
   };
+
   schema = {
     name: Joi.string().required().label("Full Name"),
     username: Joi.string().required().label("Username"),
-    email: Joi.string().required().label("Email ID"),
+    email: Joi.string().email().required().label("Email"),
     password: Joi.string().required().label("Password"),
     password2: Joi.string().required().label("Confirm Password"),
+    role: Joi.string().required().valid("professeur", "ex-etudiant", "etudiant").label("Role"),
+    cinNumber: Joi.string().required().length(8).regex(/^\d+$/).label("CIN Number"),
   };
+
   doSubmit = async () => {
     try {
-      const response = await userService.register(this.state.data);
-      console.log(response);
-      localStorage.setItem("token", response.headers["x-auth-token"]);
-      window.location = "/dashboard";
+      // Register the user
+      console.log("Submitting registration form...");
+      await userService.register(this.state.data);
+      // Set registered state to true
+      this.setState({ registered: true });
+      // Show success message
+      toast.success("Registration successful! Please login.");
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
-        //const errors = { ...this.state.errors };
         toast.error("User Already Registered");
-        // this.setState({ errors });
       }
     }
   };
+
   render() {
-    const { data, errors } = this.state;
-    if (localStorage.getItem("token")) {
-      return <Redirect to="/dashboard" />;
+    // If registered state is true, redirect to login page
+    if (this.state.registered) {
+      return <Redirect to="users/login"/>;
     }
     return (
       <React.Fragment>
@@ -44,46 +51,72 @@ class Register extends Form {
         <div className="container-fluid col-lg-4 col-md-8">
           <h1>Register</h1>
           <form onSubmit={this.handleSubmit}>
+            {/* Name */}
             <Input
-              value={data.name}
+              value={this.state.data.name}
               onChange={this.handleChange}
               label="Name"
               name="name"
               type="text"
-              error={errors.name}
+              error={this.state.errors.name}
             />
+            {/* Username */}
             <Input
               name="username"
-              value={data.username}
+              value={this.state.data.username}
               label="Username"
               type="text"
               onChange={this.handleChange}
-              error={errors.username}
+              error={this.state.errors.username}
             />
+            {/* Email */}
             <Input
-              value={data.email}
+              value={this.state.data.email}
               onChange={this.handleChange}
               label="Email ID"
               type="text"
               name="email"
-              error={errors.email}
+              error={this.state.errors.email}
             />
+            {/* Password */}
             <Input
-              value={data.password}
+              value={this.state.data.password}
               onChange={this.handleChange}
               label="Password"
               type="password"
               name="password"
-              error={errors.password}
+              error={this.state.errors.password}
             />
+            {/* Confirm Password */}
             <Input
-              value={data.password2}
+              value={this.state.data.password2}
               onChange={this.handleChange}
               label="Confirm Password"
               name="password2"
               type="password"
-              error={errors.password2}
+              error={this.state.errors.password2}
             />
+            {/* Role */}
+            <div className="mb-3">
+              <label htmlFor="role" className="form-label">Role</label>
+              <select className="form-select" id="role" name="role" value={this.state.data.role} onChange={this.handleChange}>
+                <option value="">Select Role</option>
+                <option value="professeur">Professeur</option>
+                <option value="ex-etudiant">Ex-Etudiant</option>
+                <option value="etudiant">Etudiant</option>
+              </select>
+              {this.state.errors.role && <div className="text-danger">{this.state.errors.role}</div>}
+            </div>
+            {/* CIN Number */}
+            <Input
+              value={this.state.data.cinNumber}
+              onChange={this.handleChange}
+              label="CIN Number"
+              name="cinNumber"
+              type="text"
+              error={this.state.errors.cinNumber}
+            />
+            {/* Submit Button */}
             <div className="d-grid gap-2">
               <button className="btn btn-primary" disabled={this.validate()}>
                 Register

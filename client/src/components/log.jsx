@@ -1,47 +1,42 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Joi from "joi-browser";
 import { ToastContainer, toast } from "react-toastify";
 import "../App.css";
 import Input from "../components/common/input";
 import Form from "./common/form";
 import { login } from "../services/authService";
+import {getCurrentUser} from "../services/authService";
 
-// use programmatic navigation form login form to dashboard
-
-// add functionality to show react toast if the user is redierected to different locations due to history
 class Log extends Form {
   state = {
     data: { email: "", password: "" },
-    errors: {
-      email: "",
-      passowrd: "",
-    },
+    errors: {},
   };
+
   schema = {
-    email: Joi.string().required().label("Email ID"),
+    email: Joi.string().email().required().label("Email"),
     password: Joi.string().required().label("Password"),
   };
+  currentUser;
   doSubmit = async () => {
-    // call the server;
     try {
       const { data } = this.state;
-      //console.log(data.email);
-      const { data: jwt } = await login(data.email, data.password);
-      localStorage.setItem("token", jwt);
-      const { state } = this.props.location;
-      window.location = state ? state.from.pathname : "/users/login";
+      await login(data.email, data.password); // Login function now handles storing session
+      this.currentUser = await getCurrentUser(data.email)
+      console.log("current user is: ", this.currentUser)
+      document.cookie = `userEmail=${data.email}; path=/`; // Set session cookie with user email
+      document.cookie = `userRole=${this.currentUser.role}; path=/`; // Set session cookie with user email
+
+      window.location.href = "/dashboard"; // Redirect to dashboard after successful login
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
-        toast.error("Invalid Email Or Password");
+        toast.error("Invalid Email or Password");
       }
     }
   };
+
   render() {
-    if (localStorage.getItem("token")) {
-      return <Redirect to="/dashboard" />;
-    }
-    const { data, errors } = this.state;
     return (
       <div>
         <div className="container col-lg-3 col-md-6 border rounded mt-3">
@@ -50,18 +45,17 @@ class Log extends Form {
           <form onSubmit={this.handleSubmit}>
             <Input
               name="email"
-              value={data.email}
-              label="Email ID"
+              label="Email"
+              type="email"
               onChange={this.handleChange}
-              error={errors.email}
+              error={this.state.errors.email}
             />
             <Input
               name="password"
-              value={data.password}
               label="Password"
-              onChange={this.handleChange}
-              error={errors.password}
               type="password"
+              onChange={this.handleChange}
+              error={this.state.errors.password}
             />
             <div className="text-center">
               <button
