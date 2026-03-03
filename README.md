@@ -2,8 +2,6 @@
 
 A disscussion forum built using ReactJS, NodeJS and MongoDB.
 
-<img src="images/post1.png">
-
 ## Features
 
 - Allows users to create new discussions about different topics and assign tags to them. Other users can reply to those posts, like them, etc.
