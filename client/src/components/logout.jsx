@@ -1,13 +1,20 @@
-import  { Component } from "react";
+import React, { Component } from "react";
+import { logout } from '../services/authService';
 
 class Logout extends Component {
-  componentDidMount() {
-    localStorage.removeItem("token");
-    window.location = "/dashboard";
-  }
-  render() {
-    return null;
-  }
+    async componentDidMount() {
+        try {
+            await logout();
+            window.location = "/dashboard";
+        } catch (error) {
+            console.error('Logout Error:', error);
+            // Handle logout error if needed
+        }
+    }
+
+    render() {
+        return null;
+    }
 }
 
 export default Logout;

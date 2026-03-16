@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "telnet": "^0.0.1"
+  }
+}

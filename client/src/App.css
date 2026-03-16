@@ -12,9 +12,11 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-.container{
-  width: 20%
+
+.container {
+  width: 20%;
 }
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -37,4 +39,27 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Added styles for user roles */
+.user-role {
+  font-weight: bold;
+  text-transform: capitalize;
+  margin-bottom: 20px;
+}
+
+.admin-role {
+  color: red;
+}
+
+.professeur-role {
+  color: blue;
+}
+
+.ex-etudiant-role {
+  color: green;
+}
+
+.etudiant-role {
+  color: orange;
 }
