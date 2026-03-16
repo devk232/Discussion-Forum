@@ -2,9 +2,12 @@ import "./App.css";
 import React, { Component } from "react";
 import jwtDecode from "jwt-decode";
 import { Route, Switch, Redirect } from "react-router-dom";
-
+import ContentPage from "./components/ContentPage.jsx";
+import QuizPage from "./components/QuizPage.jsx";
+import Quiz from "./components/Quiz.jsx";
 import http from "./services/httpService";
 import { api } from "./config.js";
+
 import Dashboard from "./components/dashboard";
 import Jumotron from "./components/common/jumbotron";
 import NotFound from "./components/not-found";
@@ -39,6 +42,18 @@ class App extends Component {
           <Route
             path="/dashboard"
             render={(props) => <Dashboard {...props} user={this.state.user} />}
+          />
+            <Route
+            path="/contentPage"
+            render={(props) => <ContentPage {...props} user={this.state.user} />}
+          />
+            <Route
+            path="/QuizPage"
+            render={(props) => <QuizPage {...props} user={this.state.user} />}
+          />
+            <Route
+            path="/quiz"
+            render={(props) => <Quiz {...props} user={this.state.user} />}
           />
           <Route path="/not-found" component={NotFound} />
           <ProtectedRoute

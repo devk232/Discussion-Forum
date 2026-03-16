@@ -66,7 +66,7 @@ exports.validatePost = validatePost;
 //   console.log(users);
 // }
 
-//listPosts();
+// listPosts();
 
 // async function CreatePost() {
 //   const a = new Post({
@@ -77,6 +77,6 @@ exports.validatePost = validatePost;
 //   await a.save();
 // }
 
-//CreatePost();
+// CreatePost();
 
-//listPosts();
+// listPosts();
